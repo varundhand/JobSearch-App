@@ -1,3 +1,5 @@
+// we create an index.js file for major folders and import all the components in it, which can be furthere exported and used later
+
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 
 // home screen
