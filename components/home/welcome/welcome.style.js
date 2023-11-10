@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 import { COLORS, FONT, SIZES } from "../../../constants";
 
-const styles = StyleSheet.create({
+// stylesheet object which is imported in the component
+const styles = StyleSheet.create({ 
   container: {
     width: "100%",
   },
