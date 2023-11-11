@@ -9,8 +9,10 @@ import TypeWriter from 'react-native-typewriter'
 // import {LinearGradient} from 'expo-linear-gradient';
 // import LinearGradient from 'react-native-linear-gradient'
 
+const jobTypes = ["Full-time", "Part-time", "Contractor"]
 const Welcome = () => {
   const router = useRouter()
+  const [activeJobType, setActiveJobType] = useState("Full-time");
   return (
     <View>
       {/* Header */}
@@ -44,10 +46,31 @@ const Welcome = () => {
         <TouchableOpacity style={styles.searchBtn}>
           <Image
             source={icons.search}
-            // resizeMode='contain'
+            resizeMode='contain'
             style={styles.searchBtnImage}
           />
-        </TouchableOpacity>
+        </TouchableOpacity>   
+      </View>
+
+      {/* Job Types */}
+      <View style={styles.tabsContainer}>
+        <FlatList // rendering a Flatlist 
+          data={jobTypes}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styles.tab(activeJobType,item)} // passing props to css and in line css
+              onPress={() => {
+                setActiveJobType(item);
+                router.push(`/search/${item}`)
+              }}
+            >
+              <Text style={styles.tabText(activeJobType,item)}>{item}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item} // like key in map function
+          contentContainerStyle={{columnGap:SIZES.small}} 
+          horizontal
+        />
       </View>
     </View>
   )
