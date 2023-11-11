@@ -43,7 +43,7 @@ const Welcome = () => {
             placeholderTextColor='darkgrey'
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn}>
+        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
           <Image
             source={icons.search}
             resizeMode='contain'
@@ -69,7 +69,7 @@ const Welcome = () => {
           )}
           keyExtractor={item => item} // like key in map function
           contentContainerStyle={{columnGap:SIZES.small}} 
-          horizontal
+          horizontal  
         />
       </View>
     </View>
