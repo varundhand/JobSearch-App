@@ -10,6 +10,7 @@ import useFetch from '../../../hooks/useFetch'
 
 const Popularjobs = () => {
   const router = useRouter()
+
   const [data, setdata] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -38,11 +39,12 @@ const Popularjobs = () => {
 
       <View style={styles.cardsContainer}>
         {isLoading ? (
-          <ActivityIndicator size='large' color={COLORS.tertiary} /> // react native built in loader
+          <ActivityIndicator size='large' color={COLORS.tertiary} /> // react native  built in loader
         ) : error ? (
           <Text>Something went wrong :/</Text>
         ) : (
           <FlatList
+            // data={data}
             data={[1,2,3,4,5]}
             renderItem={({item}) => (
               <PopularJobCard
@@ -51,7 +53,7 @@ const Popularjobs = () => {
                 // selectedJob={selectedJob}
               />
             )}
-            keyExtractor={item => item?.job_id}
+            // keyExtractor={item => item?.job_id} //! check this
             contentContainerStyle={{columnGap: SIZES.medium}}
             horizontal
           />

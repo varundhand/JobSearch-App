@@ -31,7 +31,7 @@ const Home = () => {
                 <View
                     style={{
                         flex: 1,
-                        padding: SIZES.medium
+                        padding: SIZES.medium //TODO: remove this and add it to child components to make popularJobsCards look better
                     }}
                 >
                     <Welcome
