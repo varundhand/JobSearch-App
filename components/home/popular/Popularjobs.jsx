@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
 import { useRouter } from 'expo-router'
 
@@ -20,13 +20,10 @@ const Popularjobs = () => {
   const handleCardPress = (item) => {
 
   }
-  const {data, isLoading, error} = useFetch(
-    'search',
-    {
-      query: 'React developer',
-      num_pages: '1'
-    }
-  );
+  const { data, isLoading, error } = useFetch('search', {
+    query: 'React developer',
+    num_pages: '1',
+  });
 
   return (
     <View style={styles.container}>

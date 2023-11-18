@@ -5,6 +5,7 @@ import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
 const styles = StyleSheet.create({
   container: (selectedJob, item) => ({
     width: 250,
+    // marginTop:15,
     padding: SIZES.xLarge,
     backgroundColor: selectedJob === item.job_id ? COLORS.primary : "#FFF",
     borderRadius: SIZES.medium,
@@ -19,13 +20,14 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.medium,
     justifyContent: "center",
     alignItems: 'center',
+    // paddingBottom: SIZES.xLarge,
   }),
   logoImage: {
     // flex:1,
     width: "100%",
     height: "60%",
     resizeMode:"contain",
-    // justifyContent:"space-between"
+    // justifyContent:"space-between"    
   },
   companyName: {
     fontSize: SIZES.medium,

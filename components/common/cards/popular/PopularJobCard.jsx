@@ -7,17 +7,14 @@ import defaultImage from '../../../../assets/default-job.png'
 import { useCheckImageURL } from '../../../../hooks/useCheckImageUrl'
 
 const PopularJobCard = ({item, selectedJob, handleCardPress}) => {
-  // const isImageUrl = useCheckImageUrl(item.employer_logo)
-  // console.log('ImageUrl---> ', item.employer_logo)
-  // console.log('checking---> ', isImageUrl)
   const isImage = useCheckImageURL(item.employer_logo)
-  console.log(isImage,item.employer_logo)
+  // console.log(isImage,item.employer_logo)
 
   return (
     <TouchableOpacity // we wrap the whole card component in TouchableOpacity because it acts like a button
       style={styles.container(selectedJob, item)}
       // onPress={() => handleCardPress(item)}
-      onPress={() => console.log('selectedJob-->', selectedJob, 'item--->', item)}
+      // onPress={() => console.log('selectedJob-->', selectedJob, 'item--->', item)}
     >
       <TouchableOpacity style={styles.logoContainer}>
         <Image
