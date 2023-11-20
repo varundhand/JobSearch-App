@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 
 import styles from './tabs.style'
 
-const Tabs = () => {
+const Tabs = ({tabs,activetab,setActivetab}) => {
   return (
     <View>
       <Text>Tabs</Text>

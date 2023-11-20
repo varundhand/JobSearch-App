@@ -8,11 +8,14 @@ import { COLORS,SIZES,icons } from '../../constants'
 import useFetch from '../../hooks/useFetch'
 // import { isLoading } from 'expo-font'
 
+const tabs = ["About", "Qualifications","Responsibilities"]
+
 const JobDetails = () => {
     const params = useLocalSearchParams()
     const router = useRouter()
-
+    
     const [refreshing, setRefreshing] = useState(false);
+    const [activetab, setActivetab] = useState(tabs[0]);
 
     const onRefresh = () => {
 
@@ -23,6 +26,7 @@ const JobDetails = () => {
         // extended_publisher_details: 'false' 
     }
   )
+  console.log(params.id)
 
     // const handleShare = () => { //TODO: add share functionality
 
@@ -69,7 +73,18 @@ const JobDetails = () => {
                     <Text>We dont have the sufficient data at the moment.</Text>
                 ) : (
                     <View style={{padding: SIZES.medium, paddingBottom:100}}>
+                        <Company
+                            companyLogo={data[0].employer_logo}
+                            jobTitle={data[0].job_title}
+                            companyName={data[0].employer_name}
+                            location={data[0].estimated_salaries[0].location}
+                        />
 
+                        <JobTabs
+                            tabs={tabs}
+                            activetab={activetab}
+                            setActivetab={setActivetab}
+                        />
                     </View>
                 )}
             </ScrollView>
