@@ -18,7 +18,7 @@ const JobDetails = () => {
     const [activetab, setActivetab] = useState(tabs[0]);
 
     const onRefresh = () => {
-
+        
     }
 
   const {data, isLoading, error, refetch} = useFetch('job-details', {
@@ -26,15 +26,39 @@ const JobDetails = () => {
         // extended_publisher_details: 'false' 
     }
   )
-  console.log(params.id)
+
+  // Destructured data //! ASYNC error cus it takes time to fetch data
+    const {job_highlights: {Qualifications : points = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Qualifications :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
+    console.log('job_highlights',points)
+    
 
     // const handleShare = () => { //TODO: add share functionality
 
     // }
 
-//   console.log(data)
-
-    // const data = [12,3,4,5]
+    const displayTabContent = () => {
+        switch (activetab) {
+            case "About":
+                return <JobAbout
+                    title="About"
+                />
+                break;
+            case "Qualifications":
+                return <Specifics
+                    title="Qualifications"
+                    points={points}
+                />
+                break;
+            case "Responsibilities":
+                return <JobFooter
+                    title="Responsibilities"
+                    
+                />
+                break;
+            default:
+                break;
+        }
+    }
 
   return (
     <SafeAreaView style={{flex:1, backgroundColor:COLORS.lightWhite}}>
@@ -70,14 +94,16 @@ const JobDetails = () => {
                 ) : error ? (
                     <Text>Something went wrong :/</Text>
                 ) : data.length === 0 ? (
-                    <Text>We dont have the sufficient data at the moment.</Text>
+                    <View style={{alignContent: 'center', justifyContent: 'center'}}>
+                        <Text >We dont have the sufficient data at the moment.</Text>
+                    </View>
                 ) : (
                     <View style={{padding: SIZES.medium, paddingBottom:100}}>
                         <Company
                             companyLogo={data[0].employer_logo}
                             jobTitle={data[0].job_title}
                             companyName={data[0].employer_name}
-                            location={data[0].estimated_salaries[0].location}
+                            location={data[0].estimated_salaries[0]?.location}
                         />
 
                         <JobTabs
@@ -85,6 +111,8 @@ const JobDetails = () => {
                             activetab={activetab}
                             setActivetab={setActivetab}
                         />
+
+                        {displayTabContent()}
                     </View>
                 )}
             </ScrollView>

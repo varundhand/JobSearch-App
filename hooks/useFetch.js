@@ -3,6 +3,7 @@ import axios from "axios";
 import {RAPID_API_KEY} from '@env'
 
 const apiKey = RAPID_API_KEY
+console.log(RAPID_API_KEY)
 console.log('Api_key --->',apiKey)
 
 const useFetch = (endpoint,query) => {
@@ -25,7 +26,7 @@ const useFetch = (endpoint,query) => {
          
         try {
             const response = await axios.request(options);
-            console.log(response)
+            // console.log(response)
             setData(response.data.data) // takes the actual data from response object
             setIsLoading(false)
         } catch(error){
