@@ -1,8 +1,8 @@
 import { useCallback,useState } from 'react'
 
-import { Text, View, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl } from 'react-native'
-import { Stack, useRouter,useLocalSearchParams } from 'expo-router' // useLocalSearchParams
-import { Company,JobAbout,JobFooter,JobTabs, ScreenHeaderBtn,Specifics } from '../../components' // changed the naming convention in index.js of components
+import { Text, View, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl,TouchableOpacity} from 'react-native'
+import { Stack, useRouter,useLocalSearchParams, Link } from 'expo-router' // useLocalSearchParams
+import { Company,JobAbout,JobFooter,JobTabs, ScreenHeaderBtn,Specifics, LinkBtn } from '../../components' // changed the naming convention in index.js of components
 
 import { COLORS,SIZES,icons } from '../../constants'
 import useFetch from '../../hooks/useFetch'
@@ -27,11 +27,26 @@ const JobDetails = () => {
     }
   )
 
+//   //TODO: make separate component for this
+//     const LinkButton = () => {
+//         return (
+//             <View style={{margin:SIZES.small}}>
+//                 <TouchableOpacity
+//                     style={{paddingVertical:SIZES.medium, paddingHorizontal:SIZES.xLarge, backgroundColor: COLORS.tertiary, borderRadius:SIZES.medium, marginLeft: 2, shadowColor:COLORS.white}}
+//                 >
+//                     <Text style={{color:COLORS.primary}}>yeet</Text>
+//                 </TouchableOpacity>
+//             </View>
+//         )
+//     }
+
   // Destructured data //! ASYNC error cus it takes time to fetch data
-    const {job_highlights: {Qualifications : points = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Qualifications :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
     const { job_description } = data.length > 0 ? data[0] : {job_description : ["No data provided"]}
+    const {job_highlights: {Qualifications : points = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Qualifications :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
+    const {job_highlights: {Responsibilities : responsibilities = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Responsibilities :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
+    // console.log('YEEEET',responsibilities)
     // console.log('job_highlights',points)
-    console.log('job_description',job_description)
+    // console.log('job_description',job_description)
     
 
     // const handleShare = () => { //TODO: add share functionality
@@ -52,9 +67,9 @@ const JobDetails = () => {
                 />
                 break;
             case "Responsibilities":
-                return <JobFooter
+                return <Specifics
                     title="Responsibilities"
-                    
+                    points={responsibilities}
                 />
                 break;
             default:
@@ -83,7 +98,7 @@ const JobDetails = () => {
                         handlePress={() => console.log("share button clicked")}
                     />
                 ),
-                headerTitle: ''
+                headerTitle: (props) => <LinkBtn {...props}/>
             }}
         />
 
@@ -100,7 +115,7 @@ const JobDetails = () => {
                         <Text >We dont have the sufficient data at the moment.</Text>
                     </View>
                 ) : (
-                    <View style={{padding: SIZES.medium, paddingBottom:100}}>
+                    <View style={{padding: SIZES.medium,paddingTop:0 , paddingBottom:100}}>
                         <Company
                             companyLogo={data[0].employer_logo}
                             jobTitle={data[0].job_title}
@@ -113,7 +128,7 @@ const JobDetails = () => {
                             activetab={activetab}
                             setActivetab={setActivetab}
                         />
-
+                       
                         {displayTabContent()}
                     </View>
                 )}
