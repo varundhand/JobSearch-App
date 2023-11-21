@@ -29,7 +29,9 @@ const JobDetails = () => {
 
   // Destructured data //! ASYNC error cus it takes time to fetch data
     const {job_highlights: {Qualifications : points = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Qualifications :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
-    console.log('job_highlights',points)
+    const { job_description } = data.length > 0 ? data[0] : {job_description : ["No data provided"]}
+    // console.log('job_highlights',points)
+    console.log('job_description',job_description)
     
 
     // const handleShare = () => { //TODO: add share functionality
@@ -40,7 +42,7 @@ const JobDetails = () => {
         switch (activetab) {
             case "About":
                 return <JobAbout
-                    title="About"
+                    info={job_description}
                 />
                 break;
             case "Qualifications":
