@@ -11,7 +11,6 @@ const Specifics = ({title,points}) => {
       <View style={styles.pointsContainer}>
         {points.map((item,index) => (
           <View style={styles.pointWrapper} key={item + index}>
-            {console.log(item+index)}
             <Text style={styles.pointDot}/>
             <Text style={styles.pointText}>{item.replace(/^\\t/, '')}</Text>
           </View>

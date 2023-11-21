@@ -27,28 +27,12 @@ const JobDetails = () => {
     }
   )
 
-//   //TODO: make separate component for this
-//     const LinkButton = () => {
-//         return (
-//             <View style={{margin:SIZES.small}}>
-//                 <TouchableOpacity
-//                     style={{paddingVertical:SIZES.medium, paddingHorizontal:SIZES.xLarge, backgroundColor: COLORS.tertiary, borderRadius:SIZES.medium, marginLeft: 2, shadowColor:COLORS.white}}
-//                 >
-//                     <Text style={{color:COLORS.primary}}>yeet</Text>
-//                 </TouchableOpacity>
-//             </View>
-//         )
-//     }
-
-  // Destructured data //! ASYNC error cus it takes time to fetch data
+  // Destructured data 
     const { job_description } = data.length > 0 ? data[0] : {job_description : ["No data provided"]}
     const {job_highlights: {Qualifications : points = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Qualifications :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
     const {job_highlights: {Responsibilities : responsibilities = ['N/A']}} = data.length > 0 ? data[0] : {job_highlights:{Responsibilities :['N/A']}} // default value as 'N/A' and when the data is being fetched its set to ['N/A']
-    // console.log('YEEEET',responsibilities)
-    // console.log('job_highlights',points)
-    // console.log('job_description',job_description)
+    const {job_google_link : url} = data.length > 0 ? data[0] : {job_google_link : "https://www.google.com/about/careers/applications/jobs/results/"}
     
-
     // const handleShare = () => { //TODO: add share functionality
 
     // }
@@ -98,7 +82,8 @@ const JobDetails = () => {
                         handlePress={() => console.log("share button clicked")}
                     />
                 ),
-                headerTitle: (props) => <LinkBtn {...props}/>
+                // headerTitle: (props) => <LinkBtn {...props}/> // wont use it anymore
+                headerTitle: ''
             }}
         />
 
@@ -133,6 +118,8 @@ const JobDetails = () => {
                     </View>
                 )}
             </ScrollView>
+
+            <JobFooter url={url}/>
         </>
     </SafeAreaView>
   ) 

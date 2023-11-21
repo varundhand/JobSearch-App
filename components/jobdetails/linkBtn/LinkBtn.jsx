@@ -7,7 +7,7 @@ const LinkBtn = () => {
   return (
     <View style={styles.container}>
         <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnText}>Apply ➡️</Text>
+            <Text style={styles.btnText}>About Company ➡️</Text>
         </TouchableOpacity>
     </View>
   )
